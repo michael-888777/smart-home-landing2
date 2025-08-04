@@ -17,33 +17,38 @@ export default function Temperature() {
         setLoading(false)
       })
       .catch(err => {
-        console.error(err)
-        setError('Failed to fetch temperature data.')
+        setError('Failed to fetch temperature.')
         setLoading(false)
       })
   }, [])
 
   return (
     <div style={{
-      padding: '2rem',
-      maxWidth: '600px',
-      margin: '0 auto',
-      textAlign: 'center',
-      fontFamily: 'Arial, sans-serif'
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '80vh',
+      padding: '2rem'
     }}>
-      <h1>Smart Home Temperature</h1>
+      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>🌡️ Current Temperature</h1>
 
-      {loading && <p>Loading temperature...</p>}
-
+      {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {temp !== null && !loading && !error && (
-        <div style={{ marginTop: '1rem' }}>
-          <p style={{ fontSize: '2rem' }}>
-            <strong>{temp}° {unit}</strong>
-          </p>
-          <p style={{ fontSize: '0.9rem', color: '#555' }}>
-            Last updated: {new Date(timestamp).toLocaleString()}
+        <div style={{
+          background: '#f5f5f5',
+          padding: '2rem',
+          borderRadius: '8px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+          textAlign: 'center',
+          minWidth: '250px'
+        }}>
+          <p style={{ fontSize: '2.5rem', margin: 0 }}>{temp}°</p>
+          <p style={{ marginTop: '0.5rem' }}>{unit}</p>
+          <p style={{ fontSize: '0.85rem', marginTop: '1rem', color: '#555' }}>
+            Updated: {new Date(timestamp).toLocaleString()}
           </p>
         </div>
       )}
